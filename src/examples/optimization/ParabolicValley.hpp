@@ -4,7 +4,7 @@
 #include "../../optimization/DownhillSimplexMethod.hpp"
 
 /**
- * TODO(pieloth): documentation
+ * Rosenbrock's valley or Rosenbrock's banana function, f(1, 1) = 0
  *
  * \author cpieloth
  * \copyright Copyright 2014 Christof Pieloth, Licensed under the Apache License, Version 2.0

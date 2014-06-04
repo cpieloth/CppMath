@@ -4,7 +4,7 @@
 #include "../../optimization/DownhillSimplexMethod.hpp"
 
 /**
- * TODO(pieloth): documentation
+ * Powell's quartic function, f(0, 0, 0 0 ) = 0
  *
  * \author cpieloth
  * \copyright Copyright 2014 Christof Pieloth, Licensed under the Apache License, Version 2.0

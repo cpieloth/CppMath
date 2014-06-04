@@ -4,7 +4,7 @@
 #include "../../optimization/DownhillSimplexMethod.hpp"
 
 /**
- * TODO(pieloth): documentation
+ * Beale's function, f(3, 0.5) = 0
  *
  * \author cpieloth
  * \copyright Copyright 2014 Christof Pieloth, Licensed under the Apache License, Version 2.0
