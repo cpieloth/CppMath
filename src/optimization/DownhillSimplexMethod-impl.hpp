@@ -4,7 +4,7 @@
 #include <cassert>
 #include <cmath> // pow()
 
-#include <iostream> // error log
+#include <iostream> // std::cerr
 
 #include "DownhillSimplexMethod.hpp"
 

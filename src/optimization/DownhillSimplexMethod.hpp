@@ -30,6 +30,11 @@ public:
      */
     virtual double func( const PointT& x ) const = 0;
 
+    /**
+     * Checks if the optimization is converged.
+     *
+     * \return True, if optimization is converged.
+     */
     virtual bool isConverged() const;
 
     double getReflectionCoeff() const;
@@ -61,6 +66,7 @@ public:
     PointT getBestVariable() const;
 
     /**
+     * Starts the optimization.
      *
      * \param initial Initial start point.
      */
@@ -96,6 +102,7 @@ private:
     PointT m_xr;
 };
 
+// Load the implementation
 #include "DownhillSimplexMethod-impl.hpp"
 
 #endif  // DOWNHILLSIMPLEXMETHOD_HPP_
