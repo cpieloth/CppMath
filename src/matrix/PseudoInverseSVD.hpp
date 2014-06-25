@@ -69,4 +69,4 @@ private:
 // Load the implementation
 #include "PseudoInverseSVD-impl.hpp"
 
-#endif  // PSEUDOINVERSESVD_HPp_
+#endif  // PSEUDOINVERSESVD_HPP_
