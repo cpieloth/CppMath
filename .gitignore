@@ -1,6 +1,11 @@
 # IDE settings
 .cproject
 .project
+.pydevproject
+
+# Output folder
+Release
+Debug
 
 # Compiled Object files
 *.slo
@@ -23,3 +28,6 @@
 *.exe
 *.out
 *.app
+
+# Python
+*.pyc
