@@ -3,12 +3,12 @@
 
 #include <cxxtest/TestSuite.h>
 
-#include "optimization/DownhillSimplexMethod.hpp"
+#include <cppmath/optimization/DownhillSimplexMethod.hpp>
 
 /**
  * Beale's function, f(3, 0.5) = 0
  */
-class BealesFunction: public DownhillSimplexMethod< 2 >
+class BealesFunction: public cppmath::DownhillSimplexMethod< 2 >
 {
 public:
     BealesFunction()
@@ -36,7 +36,7 @@ double BealesFunction::func( const PointT& x ) const
 /**
  * Rosenbrock's valley or Rosenbrock's banana function, f(1, 1) = 0
  */
-class ParabolicValley: public DownhillSimplexMethod< 2 >
+class ParabolicValley: public cppmath::DownhillSimplexMethod< 2 >
 {
 public:
     ParabolicValley()
@@ -61,7 +61,7 @@ double ParabolicValley::func( const PointT& x ) const
 /**
  * Powell's quartic function, f(0, 0, 0, 0 ) = 0
  */
-class QuarticFunction: public DownhillSimplexMethod< 4 >
+class QuarticFunction: public cppmath::DownhillSimplexMethod< 4 >
 {
 public:
     QuarticFunction()
@@ -226,7 +226,7 @@ public:
 
         QuarticFunction opt;
         const QuarticFunction::PointT initial( 5.0, 5.0, 5.0, 5.0 );
-        opt.setMaximumIterations(500);
+        opt.setMaximumIterations( 500 );
         opt.optimize( initial );
 
         const QuarticFunction::PointT res = opt.getBestVariable();

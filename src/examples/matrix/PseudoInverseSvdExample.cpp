@@ -2,7 +2,7 @@
 
 #include <Eigen/Dense>
 
-#include "../../matrix/PseudoInverseSVD.hpp"
+#include <cppmath/matrix/PseudoInverseSVD.hpp>
 
 using namespace Eigen;
 using namespace std;
@@ -22,7 +22,7 @@ int main()
     VectorXd diff;
 
     // Method call #1
-    PseudoInverseSVD< MatrixXd > pinv( A );
+    cppmath::PseudoInverseSVD< MatrixXd > pinv( A );
     MatrixXd Ainv;
     pinv.compute( &Ainv );
     VectorXd xs1 = Ainv * b;

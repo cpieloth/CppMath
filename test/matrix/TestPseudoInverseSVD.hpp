@@ -4,7 +4,7 @@
 #include <cxxtest/TestSuite.h>
 #include <Eigen/Dense>
 
-#include "matrix/PseudoInverseSVD.hpp"
+#include <cppmath/matrix/PseudoInverseSVD.hpp>
 
 class TestPseudoInverseSVD: public CxxTest::TestSuite
 {
@@ -21,7 +21,7 @@ public:
         x.setRandom();
         Eigen::VectorXd b = A * x;
 
-        PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
+        cppmath::PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
         const Eigen::MatrixXd& Ainv = pinv.compute();
         Eigen::VectorXd xs = Ainv * b;
         Eigen::VectorXd diff = x - xs;
@@ -40,7 +40,7 @@ public:
         x.setRandom();
         Eigen::VectorXd b = A * x;
 
-        PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
+        cppmath::PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
         Eigen::MatrixXd Ainv;
         pinv.compute( &Ainv );
         Eigen::VectorXd xs = Ainv * b;
@@ -60,7 +60,7 @@ public:
         x.setRandom();
         Eigen::VectorXd b = A * x;
 
-        PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
+        cppmath::PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
         Eigen::VectorXd xs = pinv * b;
         Eigen::VectorXd diff = x - xs;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
@@ -75,7 +75,7 @@ public:
         Eigen::MatrixXd A( rows, cols );
         A.setRandom();
 
-        PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
+        cppmath::PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
         Eigen::MatrixXd I = pinv * A;
         TS_ASSERT( I.isIdentity() );
     }
@@ -89,7 +89,7 @@ public:
         Eigen::MatrixXd A( rows, cols );
         A.setIdentity();
 
-        PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
+        cppmath::PseudoInverseSVD< Eigen::MatrixXd > pinv( A );
         const Eigen::MatrixXd& I = pinv.compute();
         TS_ASSERT( I.isIdentity() );
     }
