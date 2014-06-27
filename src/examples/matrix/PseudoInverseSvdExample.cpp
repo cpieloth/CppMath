@@ -17,8 +17,7 @@ int main()
     A.setRandom();
     VectorXd x( cols );
     x.setRandom();
-    VectorXd b( 102 );
-    b = A * x;
+    VectorXd b = A * x;
     cout << "x:" << endl << x << endl;
     VectorXd diff;
 
