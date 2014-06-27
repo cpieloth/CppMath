@@ -127,6 +127,9 @@ class Installer(AInstaller):
 
         if AInstaller.ask_for_execute("Install Eigen"):
             rc += call("python install_eigen3.py " + destdir_arg, shell=True)
+            
+        if AInstaller.ask_for_execute("Install CxxTest"):
+            rc += call("python install_cxxtest.py " + destdir_arg, shell=True)
 
         if rc == 0:
             return True
