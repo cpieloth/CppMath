@@ -21,6 +21,7 @@ namespace cppmath
         m_iterations = 0;
         m_epsilon = 1e-9;
         m_initFactor = 2.0;
+        m_yr = 0.0;
     }
 
     template< size_t DIM >
