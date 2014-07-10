@@ -144,8 +144,7 @@ public:
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const BealesFunction::ParamsT res = opt.getResultParams();
-        const double fx = opt.func( res );
+        const double fx = opt.getResultError();
         TS_ASSERT_LESS_THAN( fx, eps );
         TS_ASSERT_LESS_THAN( opt.getResultIterations(), max_it );
     }
@@ -201,8 +200,7 @@ public:
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const ParabolicValley::ParamsT res = opt.getResultParams();
-        const double fx = opt.func( res );
+        const double fx = opt.getResultError();
         TS_ASSERT_LESS_THAN( fx, eps );
         TS_ASSERT_LESS_THAN( opt.getResultIterations(), max_it );
     }
@@ -259,8 +257,7 @@ public:
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const QuarticFunction::ParamsT res = opt.getResultParams();
-        const double fx = opt.func( res );
+        const double fx = opt.getResultError();
         TS_ASSERT_LESS_THAN( fx, eps );
         TS_ASSERT_LESS_THAN( opt.getResultIterations(), max_it );
     }

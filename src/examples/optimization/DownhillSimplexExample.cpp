@@ -15,7 +15,7 @@ int main()
     ParabolicValley pv;
     pv.optimize( ParabolicValley::ParamsT( -1.2, 1 ) );
     std::cout << tab << tab << pv.getResultIterations() << "/" << pv.getMaximumIterations() << " iterations" << std::endl;
-    std::cout << tab << tab << pv.func( pv.getResultParams() ) << "/" << pv.getEpsilon() << " epsilon" << std::endl;
+    std::cout << tab << tab << pv.getResultError() << "/" << pv.getEpsilon() << " epsilon" << std::endl;
     std::cout << tab << tab << "Result: " << pv.getResultParams() << std::endl;
 
     std::cout << std::endl;
@@ -24,7 +24,7 @@ int main()
     BealesFunction bf = BealesFunction();
     bf.optimize( BealesFunction::ParamsT( 1, 1 ) );
     std::cout << tab << tab << bf.getResultIterations() << "/" << bf.getMaximumIterations() << " iterations" << std::endl;
-    std::cout << tab << tab << bf.func( bf.getResultParams() ) << "/" << bf.getEpsilon() << " epsilon" << std::endl;
+    std::cout << tab << tab << bf.getResultError() << "/" << bf.getEpsilon() << " epsilon" << std::endl;
     std::cout << tab << tab << "Result: " << bf.getResultParams() << std::endl;
 
     std::cout << std::endl;
@@ -33,7 +33,7 @@ int main()
     QuarticFunction qf;
     qf.optimize( QuarticFunction::ParamsT( 3, -1, 0, 1 ) );
     std::cout << tab << tab << qf.getResultIterations() << "/" << qf.getMaximumIterations() << " iterations" << std::endl;
-    std::cout << tab << tab << qf.func( qf.getResultParams() ) << "/" << qf.getEpsilon() << " epsilon" << std::endl;
+    std::cout << tab << tab << qf.getResultError() << "/" << qf.getEpsilon() << " epsilon" << std::endl;
     std::cout << tab << tab << "Result: " << qf.getResultParams() << std::endl;
 
     return 0;

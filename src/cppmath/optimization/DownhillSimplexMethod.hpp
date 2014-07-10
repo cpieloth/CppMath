@@ -77,6 +77,8 @@ namespace cppmath
 
         ParamsT getResultParams() const;
 
+        double getResultError() const;
+
         /**
          * Starts the optimization.
          *
@@ -86,12 +88,12 @@ namespace cppmath
 
     protected:
         /**
-         * Orders the parameters from min to max function values.
+         * Orders the parameters x and f(x) from min to max.
          */
         virtual void order();
 
         /**
-         * Creates the initial parameter set.
+         * Creates the initial parameter set and their function values.
          *
          * \param initial Start parameter used to calculate initials.
          */
@@ -99,6 +101,7 @@ namespace cppmath
         double m_initFactor; /**< Factor to create the initial parameter set. */
 
         ParamsT m_x[DIM + 1]; /**< Vector of all n+1 points. */
+        double m_y[DIM + 1]; /**< Stores the function values to reduce re-calculation. */
 
         double m_epsilon; /**< Threshold or deviation for convergence. */
         size_t m_maxIterations; /**< Maximum iterations until the algorithm is canceled. */
@@ -124,6 +127,7 @@ namespace cppmath
 
         ParamsT m_xo;
         ParamsT m_xr;
+        double m_yr;
     };
 } /* namespace cppmath */
 
