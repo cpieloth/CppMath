@@ -8,7 +8,7 @@ BealesFunction::~BealesFunction()
 {
 }
 
-double BealesFunction::func( const PointT& x ) const
+double BealesFunction::func( const ParamsT& x ) const
 {
     const double x1 = x( 0 );
     const double x2 = x( 1 );

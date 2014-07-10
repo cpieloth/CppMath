@@ -19,11 +19,11 @@ public:
     {
     }
 
-    virtual double func( const PointT& x ) const;
+    virtual double func( const ParamsT& x ) const;
 };
 
 inline
-double BealesFunction::func( const PointT& x ) const
+double BealesFunction::func( const ParamsT& x ) const
 {
     const double x1 = x( 0 );
     const double x2 = x( 1 );
@@ -47,11 +47,11 @@ public:
     {
     }
 
-    virtual double func( const PointT& x ) const;
+    virtual double func( const ParamsT& x ) const;
 };
 
 inline
-double ParabolicValley::func( const PointT& x ) const
+double ParabolicValley::func( const ParamsT& x ) const
 {
     const double x1 = x( 0 );
     const double x2 = x( 1 );
@@ -71,11 +71,11 @@ public:
     {
     }
 
-    virtual double func( const PointT& x ) const;
+    virtual double func( const ParamsT& x ) const;
 };
 
 inline
-double QuarticFunction::func( const PointT& x ) const
+double QuarticFunction::func( const ParamsT& x ) const
 {
     const double x1 = x( 0 );
     const double x2 = x( 1 );
@@ -96,40 +96,40 @@ class TestDownhillSimplexMethod: public CxxTest::TestSuite
 public:
     void test_optimizeBeale0()
     {
-        const BealesFunction::PointT exp( 3.0, 0.5 );
+        const BealesFunction::ParamsT exp( 3.0, 0.5 );
 
         BealesFunction opt;
-        const BealesFunction::PointT initial = exp;
+        const BealesFunction::ParamsT initial = exp;
         opt.optimize( initial );
 
-        const BealesFunction::PointT res = opt.getBestVariable();
-        const BealesFunction::PointT diff = res - exp;
+        const BealesFunction::ParamsT res = opt.getBestVariable();
+        const BealesFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
     void test_optimizeBeale1()
     {
-        const BealesFunction::PointT exp( 3.0, 0.5 );
+        const BealesFunction::ParamsT exp( 3.0, 0.5 );
 
         BealesFunction opt;
-        const BealesFunction::PointT initial = exp * -1.0;
+        const BealesFunction::ParamsT initial = exp * -1.0;
         opt.optimize( initial );
 
-        const BealesFunction::PointT res = opt.getBestVariable();
-        const BealesFunction::PointT diff = res - exp;
+        const BealesFunction::ParamsT res = opt.getBestVariable();
+        const BealesFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
     void test_optimizeBeale2()
     {
-        const BealesFunction::PointT exp( 3.0, 0.5 );
+        const BealesFunction::ParamsT exp( 3.0, 0.5 );
 
         BealesFunction opt;
-        const BealesFunction::PointT initial( 5.0, 5.0 );
+        const BealesFunction::ParamsT initial( 5.0, 5.0 );
         opt.optimize( initial );
 
-        const BealesFunction::PointT res = opt.getBestVariable();
-        const BealesFunction::PointT diff = res - exp;
+        const BealesFunction::ParamsT res = opt.getBestVariable();
+        const BealesFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
@@ -139,12 +139,12 @@ public:
         const size_t max_it = 1024;
 
         BealesFunction opt;
-        const BealesFunction::PointT initial( 5.0, 5.0 );
+        const BealesFunction::ParamsT initial( 5.0, 5.0 );
         opt.setMaximumIterations( max_it );
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const BealesFunction::PointT res = opt.getBestVariable();
+        const BealesFunction::ParamsT res = opt.getBestVariable();
         const double fx = opt.func( res );
         TS_ASSERT_LESS_THAN( fx, eps );
         TS_ASSERT_LESS_THAN( opt.getIterations(), max_it );
@@ -152,41 +152,41 @@ public:
 
     void test_optimizeParabolic0()
     {
-        const ParabolicValley::PointT exp( 1.0, 1.0 );
+        const ParabolicValley::ParamsT exp( 1.0, 1.0 );
 
         ParabolicValley opt;
-        const ParabolicValley::PointT initial = exp;
+        const ParabolicValley::ParamsT initial = exp;
         opt.optimize( initial );
 
-        const ParabolicValley::PointT res = opt.getBestVariable();
-        const ParabolicValley::PointT diff = res - exp;
+        const ParabolicValley::ParamsT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
     void test_optimizeParabolic1()
     {
-        const ParabolicValley::PointT exp( 1.0, 1.0 );
+        const ParabolicValley::ParamsT exp( 1.0, 1.0 );
 
         ParabolicValley opt;
-        const ParabolicValley::PointT initial = exp * -1.0;
+        const ParabolicValley::ParamsT initial = exp * -1.0;
         opt.optimize( initial );
 
-        const ParabolicValley::PointT res = opt.getBestVariable();
-        const ParabolicValley::PointT diff = res - exp;
+        const ParabolicValley::ParamsT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
     void test_optimizeParabolic2()
     {
-        const ParabolicValley::PointT exp( 1.0, 1.0 );
+        const ParabolicValley::ParamsT exp( 1.0, 1.0 );
 
         ParabolicValley opt;
-        const ParabolicValley::PointT initial( 5.0, 5.0 );
+        const ParabolicValley::ParamsT initial( 5.0, 5.0 );
         opt.setMaximumIterations( 500 );
         opt.optimize( initial );
 
-        const ParabolicValley::PointT res = opt.getBestVariable();
-        const ParabolicValley::PointT diff = res - exp;
+        const ParabolicValley::ParamsT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
@@ -196,12 +196,12 @@ public:
         const size_t max_it = 1024;
 
         ParabolicValley opt;
-        const ParabolicValley::PointT initial( 5.0, 5.0 );
+        const ParabolicValley::ParamsT initial( 5.0, 5.0 );
         opt.setMaximumIterations( max_it );
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const ParabolicValley::PointT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT res = opt.getBestVariable();
         const double fx = opt.func( res );
         TS_ASSERT_LESS_THAN( fx, eps );
         TS_ASSERT_LESS_THAN( opt.getIterations(), max_it );
@@ -209,42 +209,42 @@ public:
 
     void test_optimizeQuartic0()
     {
-        const QuarticFunction::PointT exp( 0.0, 0.0, 0.0, 0.0 );
+        const QuarticFunction::ParamsT exp( 0.0, 0.0, 0.0, 0.0 );
 
         QuarticFunction opt;
-        const QuarticFunction::PointT initial = exp;
+        const QuarticFunction::ParamsT initial = exp;
         opt.optimize( initial );
 
-        const QuarticFunction::PointT res = opt.getBestVariable();
-        const QuarticFunction::PointT diff = res - exp;
+        const QuarticFunction::ParamsT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
     void test_optimizeQuartic1()
     {
-        const QuarticFunction::PointT exp( 0.0, 0.0, 0.0, 0.0 );
+        const QuarticFunction::ParamsT exp( 0.0, 0.0, 0.0, 0.0 );
 
         QuarticFunction opt;
-        const QuarticFunction::PointT initial( 5.0, 5.0, 5.0, 5.0 );
+        const QuarticFunction::ParamsT initial( 5.0, 5.0, 5.0, 5.0 );
         opt.setMaximumIterations( 500 );
         opt.optimize( initial );
 
-        const QuarticFunction::PointT res = opt.getBestVariable();
-        const QuarticFunction::PointT diff = res - exp;
+        const QuarticFunction::ParamsT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
     void test_optimizeQuartic2()
     {
-        const QuarticFunction::PointT exp( 0.0, 0.0, 0.0, 0.0 );
+        const QuarticFunction::ParamsT exp( 0.0, 0.0, 0.0, 0.0 );
 
         QuarticFunction opt;
-        const QuarticFunction::PointT initial( 3.0, -1.0, 0.0, 1.0 );
+        const QuarticFunction::ParamsT initial( 3.0, -1.0, 0.0, 1.0 );
         opt.setMaximumIterations( 500 );
         opt.optimize( initial );
 
-        const QuarticFunction::PointT res = opt.getBestVariable();
-        const QuarticFunction::PointT diff = res - exp;
+        const QuarticFunction::ParamsT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
 
@@ -254,12 +254,12 @@ public:
         const size_t max_it = 1024;
 
         QuarticFunction opt;
-        const QuarticFunction::PointT initial( -5.0, -5.0, -5.0, -5.0 );
+        const QuarticFunction::ParamsT initial( -5.0, -5.0, -5.0, -5.0 );
         opt.setMaximumIterations( max_it );
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const QuarticFunction::PointT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT res = opt.getBestVariable();
         const double fx = opt.func( res );
         TS_ASSERT_LESS_THAN( fx, eps );
         TS_ASSERT_LESS_THAN( opt.getIterations(), max_it );

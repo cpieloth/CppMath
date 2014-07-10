@@ -29,9 +29,17 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    bool DownhillSimplexMethod< DIM >::isConverged() const
+    typename DownhillSimplexMethod< DIM >::Converged DownhillSimplexMethod< DIM >::converged() const
     {
-        return ( m_iterations >= m_maxIterations ) || ( func( m_x[0] ) <= m_epsilon );
+        if( m_iterations >= m_maxIterations )
+        {
+            return CONVERGED_ITERATIONS;
+        }
+        if( func( m_x[0] ) <= m_epsilon )
+        {
+            return CONVERGED_EPSILON;
+        }
+        return CONVERGED_NO;
     }
 
     template< size_t DIM >
@@ -115,19 +123,19 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    typename DownhillSimplexMethod< DIM >::PointT DownhillSimplexMethod< DIM >::getBestVariable() const
+    typename DownhillSimplexMethod< DIM >::ParamsT DownhillSimplexMethod< DIM >::getBestVariable() const
     {
         return m_x[0];
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::optimize( const PointT& initial )
+    void DownhillSimplexMethod< DIM >::optimize( const ParamsT& initial )
     {
         m_x[0] = initial;
-        typename PointT::Index dim = 0;
+        typename ParamsT::Index dim = 0;
         for( typename PointVector::size_type i = 1; i < m_x.size(); ++i )
         {
-            PointT p = initial;
+            ParamsT p = initial;
             p( dim ) = p( dim ) * m_initialFactor;
             m_x[i] = p;
             ++dim;
@@ -140,7 +148,7 @@ namespace cppmath
             {
                 case STEP_START:
                     order();
-                    if( isConverged() )
+                    if( converged() )
                     {
                         next = STEP_EXIT;
                         break;
@@ -174,7 +182,7 @@ namespace cppmath
         // Insertionsort
         for( typename PointVector::size_type i = 1; i < m_x.size(); ++i )
         {
-            const PointT insert = m_x[i];
+            const ParamsT insert = m_x[i];
             const double fInsert = func( insert );
             typename PointVector::size_type j = i;
             while( j > 0 && func( m_x[j - 1] ) > fInsert )
@@ -189,7 +197,7 @@ namespace cppmath
     template< size_t DIM >
     void DownhillSimplexMethod< DIM >::centroid()
     {
-        PointT xo = PointT::Zero();
+        ParamsT xo = ParamsT::Zero();
         for( typename PointVector::size_type i = 0; i < DIM; ++i )
         {
             xo += m_x[i];
@@ -229,7 +237,7 @@ namespace cppmath
     template< size_t DIM >
     typename DownhillSimplexMethod< DIM >::Step DownhillSimplexMethod< DIM >::expansion()
     {
-        const PointT xe = m_xo + m_gamma * ( m_xr - m_xo );
+        const ParamsT xe = m_xo + m_gamma * ( m_xr - m_xo );
         const double ye = func( xe );
         const double yl = func( m_x[0] );
 
@@ -248,13 +256,13 @@ namespace cppmath
     template< size_t DIM >
     typename DownhillSimplexMethod< DIM >::Step DownhillSimplexMethod< DIM >::contraction()
     {
-        const PointT xc = m_xo + m_beta * ( m_x[DIM] - m_xo );
+        const ParamsT xc = m_xo + m_beta * ( m_x[DIM] - m_xo );
         const double yc = func( xc );
         const double yh = func( m_x[DIM] );
 
         if( yc > yh )
         {
-            const PointT xl = m_x[0];
+            const ParamsT xl = m_x[0];
             for( typename PointVector::size_type i = 0; i < DIM + 1; ++i )
             {
                 m_x[i] = 0.5 * ( m_x[i] + xl );

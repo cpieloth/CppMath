@@ -15,7 +15,7 @@ public:
     ParabolicValley();
     virtual ~ParabolicValley();
 
-    virtual double func( const PointT& x ) const;
+    virtual double func( const ParamsT& x ) const;
 };
 
 #endif  // PARABOLICVALLEY_HPP_

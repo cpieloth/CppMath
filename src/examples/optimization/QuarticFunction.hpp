@@ -15,7 +15,7 @@ public:
     QuarticFunction();
     virtual ~QuarticFunction();
 
-    virtual double func( const PointT& x ) const;
+    virtual double func( const ParamsT& x ) const;
 };
 
 #endif  // QUARTICFUNCTION_HPP_

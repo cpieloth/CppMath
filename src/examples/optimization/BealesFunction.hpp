@@ -15,7 +15,7 @@ public:
     BealesFunction();
     virtual ~BealesFunction();
 
-    virtual double func( const PointT& x ) const;
+    virtual double func( const ParamsT& x ) const;
 };
 
 #endif  // BEALESFUNCTION_HPP_

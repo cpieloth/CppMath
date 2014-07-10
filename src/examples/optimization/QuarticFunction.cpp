@@ -10,7 +10,7 @@ QuarticFunction::~QuarticFunction()
 {
 }
 
-double QuarticFunction::func( const PointT& x ) const
+double QuarticFunction::func( const ParamsT& x ) const
 {
     const double x1 = x( 0 );
     const double x2 = x( 1 );

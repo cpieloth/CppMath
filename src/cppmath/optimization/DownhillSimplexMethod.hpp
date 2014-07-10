@@ -19,25 +19,36 @@ namespace cppmath
     class DownhillSimplexMethod
     {
     public:
+        typedef Eigen::Matrix< double, DIM, 1 > ParamsT; /**< Abbreviation for a vector of parameters. */
+
+        /**
+         * Enum to indicate how the optimization was converged.
+         */
+        enum Converged
+        {
+            CONVERGED_NO, /**< Optimization was not started. */
+            CONVERGED_EPSILON, /**< Optimization is smaller than epsilon/threshold. */
+            CONVERGED_ITERATIONS, /**< Maximum iterations was reached. */
+            CONVERGED_YES /**< Optimization is converged, but not specified how. */
+        };
+
         DownhillSimplexMethod();
         virtual ~DownhillSimplexMethod();
-
-        typedef Eigen::Matrix< double, 1, DIM > PointT;
 
         /**
          * Implementation of the function to minimize.
          *
-         * \param x  n-dimensional point
-         * \return function value for point x.
+         * \param x  n-dimensional parameter vector.
+         * \return function value for vector x.
          */
-        virtual double func( const PointT& x ) const = 0;
+        virtual double func( const ParamsT& x ) const = 0;
 
         /**
-         * Checks if the optimization is converged.
+         * Indicates how the optimization was converged.
          *
-         * \return True, if optimization is converged.
+         * \return Enum::Converged
          */
-        virtual bool isConverged() const;
+        virtual Converged converged() const;
 
         double getReflectionCoeff() const;
 
@@ -65,17 +76,17 @@ namespace cppmath
 
         size_t getIterations() const;
 
-        PointT getBestVariable() const;
+        ParamsT getBestVariable() const;
 
         /**
          * Starts the optimization.
          *
          * \param initial Initial start point.
          */
-        void optimize( const PointT& initial );
+        void optimize( const ParamsT& initial );
 
     protected:
-        typedef std::vector< PointT > PointVector;
+        typedef std::vector< ParamsT > PointVector;
         PointVector m_x; /**< Vector of all n+1 points. */
 
         double m_epsilon; /**< Threshold or deviation for convergence. */
@@ -100,8 +111,8 @@ namespace cppmath
         Step expansion();
         Step contraction();
 
-        PointT m_xo;
-        PointT m_xr;
+        ParamsT m_xo;
+        ParamsT m_xr;
     };
 } /* namespace cppmath */
 
