@@ -2,7 +2,6 @@
 #define DOWNHILLSIMPLEXMETHOD_HPP_
 
 #include <cstddef> // size_t
-#include <vector>
 
 #include <Eigen/Dense>
 
@@ -74,9 +73,9 @@ namespace cppmath
 
         void setInitialFactor( double factor );
 
-        size_t getIterations() const;
+        size_t getResultIterations() const;
 
-        ParamsT getBestVariable() const;
+        ParamsT getResultParams() const;
 
         /**
          * Starts the optimization.
@@ -86,13 +85,27 @@ namespace cppmath
         void optimize( const ParamsT& initial );
 
     protected:
-        typedef std::vector< ParamsT > PointVector;
-        PointVector m_x; /**< Vector of all n+1 points. */
+        /**
+         * Orders the parameters from min to max function values.
+         */
+        virtual void order();
+
+        /**
+         * Creates the initial parameter set.
+         *
+         * \param initial Start parameter used to calculate initials.
+         */
+        virtual void createInitials( const ParamsT& initial );
+        double m_initFactor; /**< Factor to create the initial parameter set. */
+
+        ParamsT m_x[DIM + 1]; /**< Vector of all n+1 points. */
 
         double m_epsilon; /**< Threshold or deviation for convergence. */
-
         size_t m_maxIterations; /**< Maximum iterations until the algorithm is canceled. */
         size_t m_iterations; /**< Iteration counter used for break condition. */
+
+        const size_t DIMENSION; /**< Constant for dimension. */
+        const size_t VALUES; /**< Constant for DIM+1. */
 
     private:
         enum Step
@@ -103,9 +116,7 @@ namespace cppmath
         double m_alpha; /**< Reflection coefficient. */
         double m_beta; /**< Contraction coefficient. */
         double m_gamma; /**< Expansion coefficient. */
-        double m_initialFactor; /**< Factor to create the initial point set. */
 
-        void order();
         void centroid();
         Step reflection();
         Step expansion();

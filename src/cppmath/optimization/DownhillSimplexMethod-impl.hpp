@@ -11,7 +11,8 @@
 namespace cppmath
 {
     template< size_t DIM >
-    DownhillSimplexMethod< DIM >::DownhillSimplexMethod()
+    DownhillSimplexMethod< DIM >::DownhillSimplexMethod() :
+                    DIMENSION( DIM ), VALUES( DIM + 1 )
     {
         m_alpha = 1.0;
         m_beta = 0.5;
@@ -19,8 +20,7 @@ namespace cppmath
         m_maxIterations = 128;
         m_iterations = 0;
         m_epsilon = 1e-9;
-        m_initialFactor = 2.0;
-        m_x.resize( DIM + 1 );
+        m_initFactor = 2.0;
     }
 
     template< size_t DIM >
@@ -93,7 +93,7 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    size_t DownhillSimplexMethod< DIM >::getIterations() const
+    size_t DownhillSimplexMethod< DIM >::getResultIterations() const
     {
         return m_iterations;
     }
@@ -113,33 +113,41 @@ namespace cppmath
     template< size_t DIM >
     double DownhillSimplexMethod< DIM >::getInitialFactor() const
     {
-        return m_initialFactor;
+        return m_initFactor;
     }
 
     template< size_t DIM >
     void DownhillSimplexMethod< DIM >::setInitialFactor( double factor )
     {
-        m_initialFactor = factor;
+        m_initFactor = factor;
     }
 
     template< size_t DIM >
-    typename DownhillSimplexMethod< DIM >::ParamsT DownhillSimplexMethod< DIM >::getBestVariable() const
+    typename DownhillSimplexMethod< DIM >::ParamsT DownhillSimplexMethod< DIM >::getResultParams() const
     {
         return m_x[0];
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::optimize( const ParamsT& initial )
+    void DownhillSimplexMethod< DIM >::createInitials( const ParamsT& initial )
     {
         m_x[0] = initial;
         typename ParamsT::Index dim = 0;
-        for( typename PointVector::size_type i = 1; i < m_x.size(); ++i )
+        for( size_t i = 1; i < VALUES; ++i )
         {
             ParamsT p = initial;
-            p( dim ) = p( dim ) * m_initialFactor;
+            p( dim ) = p( dim ) * m_initFactor;
             m_x[i] = p;
             ++dim;
         }
+    }
+
+    template< size_t DIM >
+    void DownhillSimplexMethod< DIM >::optimize( const ParamsT& initial )
+    {
+        // Prepare optimization
+        m_iterations = 0;
+        createInitials( initial );
 
         Step next = STEP_START;
         while( next != STEP_EXIT )
@@ -148,7 +156,7 @@ namespace cppmath
             {
                 case STEP_START:
                     order();
-                    if( converged() )
+                    if( converged() != CONVERGED_NO )
                     {
                         next = STEP_EXIT;
                         break;
@@ -180,11 +188,11 @@ namespace cppmath
         // The ordering is used in reflection() and for min/max.
         // An alternative is to  store y-values and the indices of min/max.
         // Insertionsort
-        for( typename PointVector::size_type i = 1; i < m_x.size(); ++i )
+        for( size_t i = 1; i < VALUES; ++i )
         {
             const ParamsT insert = m_x[i];
             const double fInsert = func( insert );
-            typename PointVector::size_type j = i;
+            size_t j = i;
             while( j > 0 && func( m_x[j - 1] ) > fInsert )
             {
                 m_x[j] = m_x[j - 1];
@@ -198,7 +206,7 @@ namespace cppmath
     void DownhillSimplexMethod< DIM >::centroid()
     {
         ParamsT xo = ParamsT::Zero();
-        for( typename PointVector::size_type i = 0; i < DIM; ++i )
+        for( size_t i = 0; i < DIM; ++i )
         {
             xo += m_x[i];
         }
@@ -263,7 +271,7 @@ namespace cppmath
         if( yc > yh )
         {
             const ParamsT xl = m_x[0];
-            for( typename PointVector::size_type i = 0; i < DIM + 1; ++i )
+            for( size_t i = 0; i < DIM + 1; ++i )
             {
                 m_x[i] = 0.5 * ( m_x[i] + xl );
             }

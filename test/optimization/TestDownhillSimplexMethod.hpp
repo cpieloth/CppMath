@@ -102,7 +102,7 @@ public:
         const BealesFunction::ParamsT initial = exp;
         opt.optimize( initial );
 
-        const BealesFunction::ParamsT res = opt.getBestVariable();
+        const BealesFunction::ParamsT res = opt.getResultParams();
         const BealesFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -115,7 +115,7 @@ public:
         const BealesFunction::ParamsT initial = exp * -1.0;
         opt.optimize( initial );
 
-        const BealesFunction::ParamsT res = opt.getBestVariable();
+        const BealesFunction::ParamsT res = opt.getResultParams();
         const BealesFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -128,7 +128,7 @@ public:
         const BealesFunction::ParamsT initial( 5.0, 5.0 );
         opt.optimize( initial );
 
-        const BealesFunction::ParamsT res = opt.getBestVariable();
+        const BealesFunction::ParamsT res = opt.getResultParams();
         const BealesFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -144,10 +144,10 @@ public:
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const BealesFunction::ParamsT res = opt.getBestVariable();
+        const BealesFunction::ParamsT res = opt.getResultParams();
         const double fx = opt.func( res );
         TS_ASSERT_LESS_THAN( fx, eps );
-        TS_ASSERT_LESS_THAN( opt.getIterations(), max_it );
+        TS_ASSERT_LESS_THAN( opt.getResultIterations(), max_it );
     }
 
     void test_optimizeParabolic0()
@@ -158,7 +158,7 @@ public:
         const ParabolicValley::ParamsT initial = exp;
         opt.optimize( initial );
 
-        const ParabolicValley::ParamsT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT res = opt.getResultParams();
         const ParabolicValley::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -171,7 +171,7 @@ public:
         const ParabolicValley::ParamsT initial = exp * -1.0;
         opt.optimize( initial );
 
-        const ParabolicValley::ParamsT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT res = opt.getResultParams();
         const ParabolicValley::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -185,7 +185,7 @@ public:
         opt.setMaximumIterations( 500 );
         opt.optimize( initial );
 
-        const ParabolicValley::ParamsT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT res = opt.getResultParams();
         const ParabolicValley::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -201,10 +201,10 @@ public:
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const ParabolicValley::ParamsT res = opt.getBestVariable();
+        const ParabolicValley::ParamsT res = opt.getResultParams();
         const double fx = opt.func( res );
         TS_ASSERT_LESS_THAN( fx, eps );
-        TS_ASSERT_LESS_THAN( opt.getIterations(), max_it );
+        TS_ASSERT_LESS_THAN( opt.getResultIterations(), max_it );
     }
 
     void test_optimizeQuartic0()
@@ -215,7 +215,7 @@ public:
         const QuarticFunction::ParamsT initial = exp;
         opt.optimize( initial );
 
-        const QuarticFunction::ParamsT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT res = opt.getResultParams();
         const QuarticFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -229,7 +229,7 @@ public:
         opt.setMaximumIterations( 500 );
         opt.optimize( initial );
 
-        const QuarticFunction::ParamsT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT res = opt.getResultParams();
         const QuarticFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -243,7 +243,7 @@ public:
         opt.setMaximumIterations( 500 );
         opt.optimize( initial );
 
-        const QuarticFunction::ParamsT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT res = opt.getResultParams();
         const QuarticFunction::ParamsT diff = res - exp;
         TS_ASSERT_LESS_THAN( diff.squaredNorm(), 1e-6 );
     }
@@ -259,10 +259,10 @@ public:
         opt.setEpsilon( eps );
         opt.optimize( initial );
 
-        const QuarticFunction::ParamsT res = opt.getBestVariable();
+        const QuarticFunction::ParamsT res = opt.getResultParams();
         const double fx = opt.func( res );
         TS_ASSERT_LESS_THAN( fx, eps );
-        TS_ASSERT_LESS_THAN( opt.getIterations(), max_it );
+        TS_ASSERT_LESS_THAN( opt.getResultIterations(), max_it );
     }
 
 };
