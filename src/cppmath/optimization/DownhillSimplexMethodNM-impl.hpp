@@ -1,17 +1,17 @@
-#ifndef DOWNHILLSIMPLEXMETHOD_IMPL_HPP_
-#define DOWNHILLSIMPLEXMETHOD_IMPL_HPP_
+#ifndef DOWNHILLSIMPLEXMETHODNM_IMPL_HPP_
+#define DOWNHILLSIMPLEXMETHODNM_IMPL_HPP_
 
 #include <cassert>
 #include <cmath> // pow()
 
 #include <iostream> // std::cerr
 
-#include "DownhillSimplexMethod.hpp"
+#include "DownhillSimplexMethodNM.hpp"
 
 namespace cppmath
 {
     template< size_t DIM >
-    DownhillSimplexMethod< DIM >::DownhillSimplexMethod() :
+    DownhillSimplexMethodNM< DIM >::DownhillSimplexMethodNM() :
                     DIMENSION( DIM ), VALUES( DIM + 1 )
     {
         m_alpha = 1.0;
@@ -25,12 +25,12 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    DownhillSimplexMethod< DIM >::~DownhillSimplexMethod()
+    DownhillSimplexMethodNM< DIM >::~DownhillSimplexMethodNM()
     {
     }
 
     template< size_t DIM >
-    typename DownhillSimplexMethod< DIM >::Converged DownhillSimplexMethod< DIM >::converged() const
+    typename DownhillSimplexMethodNM< DIM >::Converged DownhillSimplexMethodNM< DIM >::converged() const
     {
         if( m_iterations >= m_maxIterations )
         {
@@ -44,99 +44,99 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    double DownhillSimplexMethod< DIM >::getReflectionCoeff() const
+    double DownhillSimplexMethodNM< DIM >::getReflectionCoeff() const
     {
         return m_alpha;
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::setReflectionCoeff( double alpha )
+    void DownhillSimplexMethodNM< DIM >::setReflectionCoeff( double alpha )
     {
         assert( 0.0 <= alpha );
         m_alpha = alpha;
     }
 
     template< size_t DIM >
-    double DownhillSimplexMethod< DIM >::getContractionCoeff() const
+    double DownhillSimplexMethodNM< DIM >::getContractionCoeff() const
     {
         return m_beta;
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::setContractionCoeff( double beta )
+    void DownhillSimplexMethodNM< DIM >::setContractionCoeff( double beta )
     {
         assert( 0.0 <= beta && beta <= 1.0 );
         m_beta = beta;
     }
 
     template< size_t DIM >
-    double DownhillSimplexMethod< DIM >::getExpansionCoeff() const
+    double DownhillSimplexMethodNM< DIM >::getExpansionCoeff() const
     {
         return m_gamma;
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::setExpansionCoeff( double gamma )
+    void DownhillSimplexMethodNM< DIM >::setExpansionCoeff( double gamma )
     {
         m_gamma = gamma;
     }
 
     template< size_t DIM >
-    size_t DownhillSimplexMethod< DIM >::getMaximumIterations() const
+    size_t DownhillSimplexMethodNM< DIM >::getMaximumIterations() const
     {
         return m_maxIterations;
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::setMaximumIterations( size_t iterations )
+    void DownhillSimplexMethodNM< DIM >::setMaximumIterations( size_t iterations )
     {
         m_maxIterations = iterations;
     }
 
     template< size_t DIM >
-    double DownhillSimplexMethod< DIM >::getEpsilon() const
+    double DownhillSimplexMethodNM< DIM >::getEpsilon() const
     {
         return m_epsilon;
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::setEpsilon( double eps )
+    void DownhillSimplexMethodNM< DIM >::setEpsilon( double eps )
     {
         m_epsilon = eps;
     }
 
     template< size_t DIM >
-    double DownhillSimplexMethod< DIM >::getInitialFactor() const
+    double DownhillSimplexMethodNM< DIM >::getInitialFactor() const
     {
         return m_initFactor;
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::setInitialFactor( double factor )
+    void DownhillSimplexMethodNM< DIM >::setInitialFactor( double factor )
     {
         m_initFactor = factor;
     }
 
     template< size_t DIM >
-    size_t DownhillSimplexMethod< DIM >::getResultIterations() const
+    size_t DownhillSimplexMethodNM< DIM >::getResultIterations() const
     {
         return m_iterations;
     }
 
     template< size_t DIM >
-    typename DownhillSimplexMethod< DIM >::ParamsT DownhillSimplexMethod< DIM >::getResultParams() const
+    typename DownhillSimplexMethodNM< DIM >::ParamsT DownhillSimplexMethodNM< DIM >::getResultParams() const
     {
         return m_x[0];
     }
 
     template< size_t DIM >
-    double DownhillSimplexMethod< DIM >::getResultError() const
+    double DownhillSimplexMethodNM< DIM >::getResultError() const
     {
         return m_y[0];
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::createInitials( const ParamsT& initial )
+    void DownhillSimplexMethodNM< DIM >::createInitials( const ParamsT& initial )
     {
         m_x[0] = initial;
         typename ParamsT::Index dim = 0;
@@ -155,7 +155,7 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::optimize( const ParamsT& initial )
+    void DownhillSimplexMethodNM< DIM >::optimize( const ParamsT& initial )
     {
         // Prepare optimization
         m_iterations = 0;
@@ -195,7 +195,7 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::order()
+    void DownhillSimplexMethodNM< DIM >::order()
     {
         // The ordering is used in reflection() and for min/max.
         // Insertionsort
@@ -216,7 +216,7 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    void DownhillSimplexMethod< DIM >::centroid()
+    void DownhillSimplexMethodNM< DIM >::centroid()
     {
         ParamsT xo = ParamsT::Zero();
         for( size_t i = 0; i < DIM; ++i )
@@ -227,7 +227,7 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    typename DownhillSimplexMethod< DIM >::Step DownhillSimplexMethod< DIM >::reflection()
+    typename DownhillSimplexMethodNM< DIM >::Step DownhillSimplexMethodNM< DIM >::reflection()
     {
         m_xr = m_xo + m_alpha * ( m_xo - m_x[DIM] );
         m_yr = func( m_xr );
@@ -259,7 +259,7 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    typename DownhillSimplexMethod< DIM >::Step DownhillSimplexMethod< DIM >::expansion()
+    typename DownhillSimplexMethodNM< DIM >::Step DownhillSimplexMethodNM< DIM >::expansion()
     {
         const ParamsT xe = m_xo + m_gamma * ( m_xr - m_xo );
         const double ye = func( xe );
@@ -279,7 +279,7 @@ namespace cppmath
     }
 
     template< size_t DIM >
-    typename DownhillSimplexMethod< DIM >::Step DownhillSimplexMethod< DIM >::contraction()
+    typename DownhillSimplexMethodNM< DIM >::Step DownhillSimplexMethodNM< DIM >::contraction()
     {
         const ParamsT xc = m_xo + m_beta * ( m_x[DIM] - m_xo );
         const double yc = func( xc );
@@ -303,4 +303,4 @@ namespace cppmath
     }
 } /* namespace cppmath */
 
-#endif  // DOWNHILLSIMPLEXMETHOD_IMPL_HPP_
+#endif  // DOWNHILLSIMPLEXMETHODNM_IMPL_HPP_

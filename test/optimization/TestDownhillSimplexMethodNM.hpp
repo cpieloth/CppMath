@@ -1,14 +1,14 @@
-#ifndef TESTDOWNHILLSIMPLEXMETHOD_HPP_
-#define TESTDOWNHILLSIMPLEXMETHOD_HPP_
+#ifndef TESTDOWNHILLSIMPLEXMETHODNM_HPP_
+#define TESTDOWNHILLSIMPLEXMETHODNM_HPP_
 
 #include <cxxtest/TestSuite.h>
 
-#include <cppmath/optimization/DownhillSimplexMethod.hpp>
+#include <cppmath/optimization/DownhillSimplexMethodNM.hpp>
 
 /**
  * Beale's function, f(3, 0.5) = 0
  */
-class BealesFunction: public cppmath::DownhillSimplexMethod< 2 >
+class BealesFunction: public cppmath::DownhillSimplexMethodNM< 2 >
 {
 public:
     BealesFunction()
@@ -36,7 +36,7 @@ double BealesFunction::func( const ParamsT& x ) const
 /**
  * Rosenbrock's valley or Rosenbrock's banana function, f(1, 1) = 0
  */
-class ParabolicValley: public cppmath::DownhillSimplexMethod< 2 >
+class ParabolicValley: public cppmath::DownhillSimplexMethodNM< 2 >
 {
 public:
     ParabolicValley()
@@ -61,7 +61,7 @@ double ParabolicValley::func( const ParamsT& x ) const
 /**
  * Powell's quartic function, f(0, 0, 0, 0 ) = 0
  */
-class QuarticFunction: public cppmath::DownhillSimplexMethod< 4 >
+class QuarticFunction: public cppmath::DownhillSimplexMethodNM< 4 >
 {
 public:
     QuarticFunction()
@@ -91,7 +91,7 @@ double QuarticFunction::func( const ParamsT& x ) const
 /**
  * Tests Downhill-Simplex-Method with some predefined functions.
  */
-class TestDownhillSimplexMethod: public CxxTest::TestSuite
+class TestDownhillSimplexMethodNM: public CxxTest::TestSuite
 {
 public:
     void test_optimizeBeale0()
@@ -264,4 +264,4 @@ public:
 
 };
 
-#endif  // TESTDOWNHILLSIMPLEXMETHOD_HPP_
+#endif  // TESTDOWNHILLSIMPLEXMETHODNM_HPP_

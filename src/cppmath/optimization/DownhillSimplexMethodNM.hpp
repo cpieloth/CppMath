@@ -1,5 +1,5 @@
-#ifndef DOWNHILLSIMPLEXMETHOD_HPP_
-#define DOWNHILLSIMPLEXMETHOD_HPP_
+#ifndef DOWNHILLSIMPLEXMETHODNM_HPP_
+#define DOWNHILLSIMPLEXMETHODNM_HPP_
 
 #include <cstddef> // size_t
 
@@ -8,14 +8,14 @@
 namespace cppmath
 {
     /**
-     * Implementation of the Downhill Simplex or Nelder-Mead method for nonlinear optimization.
-     * Nelder, John Ashworth; Mead, Roger: A Simplex Method for Function Minimization. Computer Journal, 1965, 7, 308-313
+     * Implementation of the original Downhill Simplex or Nelder-Mead method for nonlinear optimization from 1965.
+     * J. Nelder, R. Mead, "A Simplex Method for Function Minimization," Computer Journal, 1965, 7, 308-313
      *
      * \author cpieloth
      * \copyright Copyright 2014 Christof Pieloth, Licensed under the Apache License, Version 2.0
      */
     template< size_t DIM >
-    class DownhillSimplexMethod
+    class DownhillSimplexMethodNM
     {
     public:
         typedef Eigen::Matrix< double, DIM, 1 > ParamsT; /**< Abbreviation for a vector of parameters. */
@@ -31,8 +31,8 @@ namespace cppmath
             CONVERGED_YES /**< Optimization is converged, but not specified how. */
         };
 
-        DownhillSimplexMethod();
-        virtual ~DownhillSimplexMethod();
+        DownhillSimplexMethodNM();
+        virtual ~DownhillSimplexMethodNM();
 
         /**
          * Implementation of the function to minimize.
@@ -132,6 +132,6 @@ namespace cppmath
 } /* namespace cppmath */
 
 // Load the implementation
-#include "DownhillSimplexMethod-impl.hpp"
+#include "DownhillSimplexMethodNM-impl.hpp"
 
-#endif  // DOWNHILLSIMPLEXMETHOD_HPP_
+#endif  // DOWNHILLSIMPLEXMETHODNM_HPP_
