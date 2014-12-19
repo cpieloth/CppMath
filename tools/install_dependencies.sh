@@ -1,0 +1,17 @@
+#!/bin/sh
+echo "CppMath requires:"
+echo "- Eigen for basic linear algebra routines"
+echo "- CxxTest for unit testing (optional)"
+echo ""
+echo "The destination folder is:"
+echo $HOME"/CppMath_dependencies/"
+echo ""
+echo "To change it, you can modify:"
+echo `pwd`"/PackBacker/jobs/CppMath_dependencies.pb"
+echo ""
+echo "If your distribution does not contain the following packages,"
+echo "you have to install them:"
+echo "- Eigen3"
+echo "- CxxTest"
+echo ""
+python3 ./PackBacker/packbacker.py ./PackBacker/jobs/CppMath_dependencies.pb

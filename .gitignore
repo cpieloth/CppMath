@@ -31,3 +31,5 @@ Debug
 
 # Python
 *.pyc
+__pycache__/
+*.py[cod]
