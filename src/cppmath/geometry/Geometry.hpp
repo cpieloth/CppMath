@@ -1,5 +1,5 @@
-#ifndef GEOMETRY_HPP_
-#define GEOMETRY_HPP_
+#ifndef CPPMATH_GEOMETROY_GEOMETRY_HPP_
+#define CPPMATH_GEOMETROY_GEOMETRY_HPP_
 
 #include <cmath>  // fabs()
 #include <limits>  // limits<double>
@@ -43,4 +43,4 @@ namespace cppmath
     }
 }
 
-#endif  // GEOMETRY_HPP_
+#endif  // CPPMATH_GEOMETROY_GEOMETRY_HPP_

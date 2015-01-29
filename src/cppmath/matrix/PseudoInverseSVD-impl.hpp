@@ -1,5 +1,5 @@
-#ifndef PSEUDOINVERSESVD_IMPL_HPP_
-#define PSEUDOINVERSESVD_IMPL_HPP_
+#ifndef CPPMATH_MATRIX_PSEUDOINVERSESVD_IMPL_HPP_
+#define CPPMATH_MATRIX_PSEUDOINVERSESVD_IMPL_HPP_
 
 #include <Eigen/Core>
 
@@ -81,4 +81,4 @@ namespace cppmath
     }
 } /* namespace cppmath */
 
-#endif  // PSEUDOINVERSESVD_IMPL_HPP_
+#endif  // CPPMATH_MATRIX_PSEUDOINVERSESVD_IMPL_HPP_

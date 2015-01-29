@@ -1,5 +1,5 @@
-#ifndef DOWNHILLSIMPLEXMETHOD_HPP_
-#define DOWNHILLSIMPLEXMETHOD_HPP_
+#ifndef CPPMATH_OPTIMIZATION_DOWNHILLSIMPLEXMETHOD_HPP_
+#define CPPMATH_OPTIMIZATION_DOWNHILLSIMPLEXMETHOD_HPP_
 
 #include <cstddef> // size_t
 
@@ -149,4 +149,4 @@ namespace cppmath
 // Load the implementation
 #include "DownhillSimplexMethod-impl.hpp"
 
-#endif  // DOWNHILLSIMPLEXMETHOD_HPP_
+#endif  // CPPMATH_OPTIMIZATION_DOWNHILLSIMPLEXMETHOD_HPP_
