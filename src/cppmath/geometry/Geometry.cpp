@@ -74,7 +74,7 @@ bool geometry::findOrthogonalVector( Vector3T* const o, const Vector3T& v )
     return false;
 }
 
-bool geometry::findTagentPlane( Vector3T* const u, Vector3T* const v, const Vector3T& n )
+bool geometry::findTangentPlane( Vector3T* const u, Vector3T* const v, const Vector3T& n )
 {
     if( !findOrthogonalVector( u, n ) )
     {
